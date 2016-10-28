@@ -1,7 +1,7 @@
 #!/bin/bash
 # shell script to install jdk
-# example : ./insJdk.sh jdk package
-# version 2.0 
+# example : source ./insJdk.sh jdk package
+# version 3.0 
 # created by zowbman@hotmail.com 2016/5/4 refer to http://www.tuicool.com/articles/f2M3YjF
 
 # 1. remove openjdk if exists.
@@ -37,28 +37,28 @@ else
 		rm -rf /usr/local/java
 		ln -s /usr/java/$newjdk /usr/local/java
 
-# 3. config /etc/profile
+# 3. config /etc/bashrc
 		today=$(date +%Y%m%d)
 
-		cp /etc/profile /etc/profile.beforeAddJDKenv.$today.bak
+		cp /etc/bashrc /etc/profile.beforeAddJDKenv.$today.bak
 
-		sed '/#JAVA ENV START/,/#JAVA ENV END/d' /etc/profile > /etc/profile.tmp
+		sed '/#JAVA ENV START/,/#JAVA ENV END/d' /etc/bashrc > /etc/bashrc.tmp
 
-		\cp /etc/profile.tmp /etc/profile
-		rm -f /etc/profile.tmp 
+		\cp /etc/bashrc.tmp /etc/bashrc
+		rm -f /etc/bashrc.tmp 
 
-		echo "#JAVA ENV START" >> /etc/profile
-		echo "JAVA_HOME=/usr/local/java" >> /etc/profile
-		echo "CLASSPATH=.:\$JAVA_HOME/lib.tools.jar" >> /etc/profile
-		echo "PATH=\$JAVA_HOME/bin:\$PATH" >> /etc/profile
-		echo "export JAVA_HOME CLASSPATH PATH" >> /etc/profileo 
-		echo "#JAVA ENV END" >> /etc/profile
+		echo "#JAVA ENV START" >> /etc/bashrc
+		echo "JAVA_HOME=/usr/local/java" >> /etc/bashrc
+		echo "CLASSPATH=.:\$JAVA_HOME/lib.tools.jar" >> /etc/bashrc
+		echo "PATH=\$JAVA_HOME/bin:\$PATH" >> /etc/bashrc
+		echo "export JAVA_HOME CLASSPATH PATH" >> /etc/bashrc
+		echo "#JAVA ENV END" >> /etc/bashrc
 
 		#. /etc/profile
 
-		source /etc/profile
+		source /etc/bashrc
 
-		echo "-->JDK environment has been successed set in /etc/profile."
+		echo "-->JDK environment has been successed set in /etc/bashrc."
 
 # 4. config user's .bash_profile
 		#if [[  -z "$2" ]] ;
